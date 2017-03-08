@@ -1,0 +1,33 @@
+<ivy-module version="1.0">
+    <info organisation="dk.javacode" module="SimpleResultSetMapper" revision="0.1.60" status="integration" publication="20170131153444"/>
+    <configurations>
+    	<conf name="default"/>
+        <conf name="compile"/>
+        <conf name="runtime"/>
+        <conf name="sources"/>
+        <conf name="javadoc"/>
+        <conf name="test" visibility="private" extends="runtime"/>
+        <conf name="utility" visibility="private"/>
+    </configurations>
+    <publications> 
+      <artifact conf="default,compile,runtime"/>
+      <artifact name="SimpleResultSetMapper-sources" type="source" ext="jar" conf="sources"/>      
+      <artifact name="SimpleResultSetMapper-examples" type="examples" ext="jar" conf="sources"/>      
+      <artifact name="SimpleResultSetMapper-javadoc" type="javadoc" ext="jar" conf="javadoc"/>      
+    </publications>
+    <dependencies defaultconf="compile;runtime;sources">    
+      <dependency org="org.slf4j" name="slf4j-api" rev="1.7.21" conf="compile,runtime->default;sources;javadoc"/>
+      
+      <!-- Test Dependencies -->
+      <dependency org="mysql" name="mysql-connector-java" rev="6.0.3" conf="test->default"/>
+      <dependency org="org.dbunit" name="dbunit" rev="2.4.9" conf="test->default"/>
+      <dependency org="com.h2database" name="h2" rev="1.3.173" conf="test->default"/>
+      <dependency org="junit" name="junit" rev="4.11" conf="test->default;sources;javadoc"/>
+      <dependency org="net.sourceforge.cobertura" name="cobertura" rev="1.9.4.1" conf="test->default"/>
+      
+      <!-- Javadoc generation dependencies -->
+      <dependency org="ch.raffael.pegdown-doclet" name="pegdown-doclet" rev="1.1.1" conf="utility->default"/>
+      <dependency org="org.markdownj" name="markdownj-core" rev="0.4" conf="utility->default"/>
+
+    </dependencies>
+</ivy-module>
