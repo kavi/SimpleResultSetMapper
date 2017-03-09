@@ -4,6 +4,7 @@
     <conf name="compile"/>
     <conf name="runtime"/>
     <conf name="sources"/>
+    <conf name="javadoc"/>
     <conf name="test"/>
     <conf name="utility" visibility="private"/>
   </configurations>
