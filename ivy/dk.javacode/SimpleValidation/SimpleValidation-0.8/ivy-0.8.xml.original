@@ -1,0 +1,23 @@
+<ivy-module version="1.0">
+  <info organisation="dk.javacode" module="SimpleValidation" revision="0.8" status="integration" publication="20161031114759"/>
+  <configurations>
+    <conf name="compile"/>
+    <conf name="runtime"/>
+    <conf name="sources"/>
+    <conf name="test"/>
+    <conf name="utility" visibility="private"/>
+  </configurations>
+  <publications>
+    <artifact conf="compile,runtime"/>
+    <artifact name="SimpleValidation-sources" type="source" ext="jar" conf="sources"/>
+  </publications>
+  <dependencies defaultconf="compile->compile;runtime->runtime;sources->sources">
+    <dependency org="thirdparty" name="validation-api" rev="1.1.0.Final"/>
+    <dependency org="thirdparty" name="junit" rev="4.11" conf="test->compile;sources->sources"/>
+    <dependency org="thirdparty" name="cobertura" rev="1.9.4.1" conf="test->compile"/>
+
+    <!-- Javadoc generation dependencies -->
+    <dependency org="ch.raffael.pegdown-doclet" name="pegdown-doclet" rev="1.1.1" conf="utility->default"/>
+    <dependency org="org.markdownj" name="markdownj-core" rev="0.4" conf="utility->default"/>
+  </dependencies>
+</ivy-module>
