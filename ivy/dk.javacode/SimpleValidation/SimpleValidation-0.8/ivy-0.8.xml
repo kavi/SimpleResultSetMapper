@@ -12,9 +12,9 @@
     <artifact name="SimpleValidation-sources" type="source" ext="jar" conf="sources"/>
   </publications>
   <dependencies defaultconf="compile->compile;runtime->runtime;sources->sources">
-    <dependency org="thirdparty" name="validation-api" rev="1.1.0.Final"/>
-    <dependency org="thirdparty" name="junit" rev="4.11" conf="test->compile;sources->sources"/>
-    <dependency org="thirdparty" name="cobertura" rev="1.9.4.1" conf="test->compile"/>
+    <dependency org="javax.validation" name="validation-api" rev="1.1.0.Final" conf="compile,runtime->default;sources;javadoc"/>
+    <dependency org="junit" name="junit" rev="4.11" conf="test->default;sources;javadoc"/>
+    <dependency org="net.sourceforge.cobertura" name="cobertura" rev="1.9.4.1" conf="test->default"/>
 
     <!-- Javadoc generation dependencies -->
     <dependency org="ch.raffael.pegdown-doclet" name="pegdown-doclet" rev="1.1.1" conf="utility->default"/>
