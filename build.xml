@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="SimpleResultSetMapper">
+	<!-- Overwrite default values here -->
+	<property name="eclipse.classpath.template" value="classpath_template" />
+	
+	<property name="target" value="1.7" />
+	<property name="source" value="1.7" />
+	
+	<import file="externals/framework_build.xml" />
+	
+	<!-- Set custom values here -->
+	<property name="examples.dir" location="./examples" />
+
+	<!-- Custom targets -->
+	<target name="pre-test">
+		<delete file="data/dbtest.h2.db" failonerror="false" />
+	</target>
+
+	<target name="pre-dist">
+		<copy todir="${build.class.dir}" overwrite="true" failonerror="true" file="${src.dir}/LICENSE" />
+		<copy todir="${build.class.dir}" overwrite="true" failonerror="true" file="${src.dir}/NOTICE" />
+	</target>
+
+	<target name="post-dist">
+		<zip destfile="${dist.dir}/${ant.project.name}-examples.jar" basedir="${examples.dir}" includes="**/*.java" />
+	</target>	
+</project>

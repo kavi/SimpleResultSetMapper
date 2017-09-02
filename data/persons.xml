@@ -1,0 +1,10 @@
+<dataset>
+    <address street_name="Falstersgade" id="1" is_public="0"/>
+    <address street_name="Ny Munkegade" id="2" is_public="1"/>
+    <persons NAME="Admin" age="12" address_id="1" smoker="Y" />
+	<persons NAME="User" age="15" address_id="2" smoker="N" />
+    <car_type id="1" make="Audi" model="A1"  />
+    <car_type id="2" make="Opel" model="Astra"  />
+    <car id="1" registration="QX94321" person_id="1" car_type_id="1" />
+    <car id="2" registration="AB12345" person_id="1" car_type_id="2" />
+</dataset>

@@ -1,0 +1,18 @@
+   SimpleResultSetMapper (Light Sleeper)
+   Copyright 2015 Kavi Mellerup
+
+   Log support is provided by the Log4j library package,
+   which is open source software. The original software is
+   available from
+      https://logging.apache.org/log4j/1.2/
+
+   For examples and tests the following open source library
+   packages are used:      
+      JUnit - http://junit.org/
+      Cobertura - https://github.com/cobertura/cobertura
+      slf4j - http://www.slf4j.org/
+      MySQL Connector - http://dev.mysql.com/downloads/connector/j/
+      DbUnit - http://dbunit.sourceforge.net/
+      H2 - http://www.h2database.com/html/main.html
+      Ant - http://ant.apache.org/
+      Ivy - http://ant.apache.org/ivy/

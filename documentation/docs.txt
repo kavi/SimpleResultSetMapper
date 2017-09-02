@@ -1,0 +1,124 @@
+# Light Sleeper
+
+## A Simple Result Set Mapper
+
+Light Sleeper is a light alternative to Hibernate. The name signifies the
+fact that the framework is more lightweight (as in A LOT) than Hibernate, but
+also want to point to the fact that the developer has to be more awake. 
+Light Sleeper takes less responsibility than Hibernate and hands it back to the
+developer. This does in effect mean more code in some places, but it also gives
+more transparency as less happens "behind the scene".
+
+The project seeks to be less complex than most Java libraries - the price being
+less flexibility....
+
+
+Light Sleeper is broken down into separate parts that can be used independently
+but which are thought of to be used together. The main component is the ResultSetMapper
+which takes a JDBC result set and maps it to Java Objects.
+
+The SqlBuilder helps build the SQL for producing the ResultSets while the SqlExecuter
+simply executes SQL (and maps it using the ResultSetMapper).
+
+As you can see the ResultSetMapper is the central part where the others are merely
+convenience methods to produce less code. (Of course you could argue that the 
+ResultSetMapper is exactly that as well.)
+
+Currently the line between SqlBuilder and Executer is a little blurry, with the builder
+actually executing the SQL it builds itself. 
+
+
+# Conventions
+
+When mapping result sets the token __ is considered a marker that means this column belongs to another class.
+
+Example:
+
+select p.id as person__id, etc....
+
+This will make the ResultSetMapper look for the column 'id' on the class mapped to the table 'person'.
+
+
+# Bi-directional mappings
+
+Currently bi-directional mappings are not supported. This means that you can't
+use the mapping annotation on both sides of a reference.
+
+UPDATE: You can now do 1-many bi-directional mapping.
+
+Apart from collections, it is only possible to make the mapping on the owning side.
+Ie. table X has a foreign key to table Y. You can map this foreign key on Class X's
+y property, but you cannot map the x property on table Y. (TODO - verify whether this
+is only the case when using the Sql-helper-tools for generating SQL, it should be possible
+for the ResultSetMapper to handle it given the proper result-set.)
+
+
+## One-to-many
+
+Currently only supports the case:
+
+A 1<-* B
+
+With the foreign key (a_id) on table B
+
+The other standard approach is not currently supported:
+
+A <- A_ref <- B
+
+Where A_ref is a table that 'connects' tables A and B.
+
+Note that by writing your own SQL you can make the resultSets in
+a format that can still be used by the ResultSetMapper - you just
+won't get help from the SqlQueryDsl.
+
+
+
+## Many-to-many
+
+This has not yet been tested.
+
+No code has been written to use tables that allow many-to-many relations.
+
+The default table layout would be:
+
+A <- A_B_ref -> B
+
+With A_B_ref having foreign keys to table A and B (a_id and b_id respectively).
+
+
+
+## Inheritance
+
+Currently no attempts have been made on supporting different ways of implementing
+inheritance. You may still be able to get a ResultSet in a format supported
+by the ResultSetMapper though.
+
+ 
+
+# Examples
+
+The examples uses a MySQL database with a schema and data which can be found
+in the examples source folder.
+
+There is no attempt of showing proper connection, transaction handling or similar.
+A connection is passed to the Dao to show how to use the Light Sleeper framework.
+How you choose to handle connections is up to you. (The SimpleInterceptorProxy framework
+can be used to inject connections and automatically rollback on errors, so take
+a look at that if you want inspiration on Connection handling).
+
+
+
+## Customer - Order - Product
+
+The first example is using a few primitives (int, long, boolean and String).
+Customer has a mapped list of Order objects and Order objects have a reference
+to Product and Customer.
+
+In the CustomerDao class examples of how to use the SqlQueryHelper and SqlQueryDsl
+can be seen. Examples include lazy loading, fetching the list of orders and fetching
+referenced products on an Order.
+
+Currently there is no examples showing how to use the ResultSetMapper with plain
+JDBC.
+
+
